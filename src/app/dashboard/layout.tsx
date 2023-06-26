@@ -13,8 +13,11 @@ async function Layout({children}: {children: ReactNode}) {
 
     const session = await getServerSession(authOptions);
 
+    console.log('session layout')
+    console.log(session)
+
     if(!session)
-        NotFound();
+        return NotFound();
 
     return (
         <div className={"w-full flex h-screen"}>

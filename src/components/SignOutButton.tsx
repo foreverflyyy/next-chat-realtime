@@ -14,7 +14,7 @@ const SignOutButton = ({...props}: SignOutButtonProps) => {
     const handlerSignOut = async () => {
         setIsSignOut(true);
         try {
-            await signOut();
+            await signOut({callbackUrl: "/"});
         } catch(err){
             toast.error("There was a problem signing out")
         } finally {

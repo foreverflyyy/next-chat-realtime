@@ -7,7 +7,11 @@ export async function fetchRedis(
     command: Command,
     ...args: (string | number)[]
 ) {
-    const commandUrl = `${upstashRedisRestUrl}/${command}/${args.join('/')}`
+    const commandUrl = `${upstashRedisRestUrl}/${command}/${args.join('/')}`;
+
+    console.log('FETCH')
+    console.log(commandUrl)
+
 
     const response = await fetch(commandUrl, {
         headers: {
@@ -15,6 +19,8 @@ export async function fetchRedis(
         },
         cache: 'no-store'
     })
+
+    console.log(response)
 
     if(!response.ok){
         throw new Error(`Error executing Redis command: ${response.statusText}`)
