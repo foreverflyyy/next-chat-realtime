@@ -8,16 +8,19 @@ import {authOptions} from "@/lib/auth";
 import {NotFound} from "next/dist/client/components/error";
 import Image from "next/image"
 import SignOutButton from "@/components/SignOutButton";
+import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
+import {fetchRedis} from "@/helpers/redis";
 
 async function Layout({children}: {children: ReactNode}) {
-
     const session = await getServerSession(authOptions);
+    if(!session) return NotFound();
 
-    console.log('session layout')
-    console.log(session)
-
-    if(!session)
-        return NotFound();
+    const unseenRequestCount = (
+        await fetchRedis(
+            'smembers',
+            `user:${session.user.id}:incoming_friend_requests`
+        ) as User[]
+    ).length;
 
     return (
         <div className={"w-full flex h-screen"}>
@@ -55,6 +58,13 @@ async function Layout({children}: {children: ReactNode}) {
                                         </li>
                                     )
                                 })}
+
+                                <li>
+                                    <FriendRequestSidebarOptions
+                                        sessionId={session.user.id}
+                                        initialUnseenRequestCount={unseenRequestCount}
+                                    />
+                                </li>
                             </ul>
                         </li>
 

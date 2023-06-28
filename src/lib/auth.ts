@@ -36,10 +36,7 @@ export const authOptions: NextAuthOptions = {
             const dbUserResult = (await fetchRedis('get', `user:${token.id}`)) as string | null;
 
             if(!dbUserResult){
-                if(user) {
-                    token.id = user!.id;
-                }
-
+                token.id = user!.id;
                 return token;
             }
 
@@ -53,7 +50,6 @@ export const authOptions: NextAuthOptions = {
             }
         },
         async session({session, token}) {
-
             if(token) {
                 session.user.id = token.id;
                 session.user.name = token.name;

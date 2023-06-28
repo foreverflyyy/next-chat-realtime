@@ -27,6 +27,7 @@ const AddFriendForm = () => {
             await axios.post('/api/friends/add', {
                 email: validateEmail
             })
+            setShowSuccessState(true)
         } catch(err) {
             if(err instanceof AxiosError) {
                 setError('email', {message: err.response?.data})
