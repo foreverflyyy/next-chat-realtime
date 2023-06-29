@@ -2,16 +2,24 @@
 import React, {useRef, useState} from 'react';
 import {Message} from "@/lib/validate/message";
 import {cn} from "@/lib/utils";
+import {format} from "date-fns";
+import Image from "next/image";
 
 interface MessagesProps {
     initialMessages: Message[];
     sessionId: string;
+    sessionImage: string | undefined | null;
+    chatPartner: User;
 }
 
-const Messages = ({initialMessages, sessionId}: MessagesProps) => {
+const Messages = ({initialMessages, sessionId, sessionImage, chatPartner}: MessagesProps) => {
 
     const [messages, setMessages] = useState(initialMessages);
     const scrollDownRef = useRef<HTMLDivElement | null>(null)
+
+    const formatTimestamp = (timestamp: number) => {
+        return format(timestamp, 'HH:mm');
+    }
 
     return (
         <div
@@ -51,10 +59,27 @@ const Messages = ({initialMessages, sessionId}: MessagesProps) => {
                                 >
                                     {message.text}{'  '}
                                     <span className={"ml-2 text-xs text-gray-400"}>
-                                        {message.timestamp}
+                                        {formatTimestamp(message.timestamp)}
                                     </span>
                                 </span>
                             </div>
+
+                            <div
+                                className={cn("relative w-6 h-6", {
+                                    "order-2": isCurrentUser,
+                                    "order-1": !isCurrentUser,
+                                    invisible: hasNextMessageFromSameUser
+                                })}
+                            >
+                                <Image
+                                    fill
+                                    src={isCurrentUser ? (sessionImage as string) : chatPartner.image}
+                                    alt={"Profile picture"}
+                                    referrerPolicy={"no-referrer"}
+                                    className={"rounded-full"}
+                                />
+                            </div>
+
                         </div>
                     </div>
                 )
