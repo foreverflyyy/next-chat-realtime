@@ -8,6 +8,7 @@ import {db} from "@/lib/db";
 import {authOptions} from "@/lib/auth";
 import Image from "next/image";
 import Messages from "@/components/Messages";
+import ChatInput from "@/components/ChatInput";
 
 interface PageProps {
     params: {
@@ -79,7 +80,10 @@ const Page = async ({params: {chatId}}: PageProps) => {
                 initialMessages={initialMessages}
                 sessionId={session.user.id}
             />
-            <ChatInput/>
+            <ChatInput
+                chatPartner={chatPartner}
+                chatId={chatId}
+            />
         </div>
     );
 };
