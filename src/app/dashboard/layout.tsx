@@ -102,7 +102,9 @@ async function Layout({children}: {children: ReactNode}) {
                     </ul>
                 </nav>
             </div>
-            {children}
+            <aside className={"container max-h-screen py-16 md:py-12 w-full"}>
+                {children}
+            </aside>
         </div>
     );
 }
