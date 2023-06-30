@@ -5,6 +5,8 @@ import {nanoid} from "nanoid";
 import {db} from "@/lib/db";
 import {messageValidator} from "@/lib/validate/message";
 import {ZodError} from "zod";
+import {pusherServer} from "@/lib/pusher";
+import {toPusherKey} from "@/lib/utils";
 
 export async function POST(req: Request){
     try {
@@ -41,6 +43,13 @@ export async function POST(req: Request){
         }
 
         const message = messageValidator.parse(messageData);
+
+        // notify all connected chat room clients
+        await pusherServer.trigger(
+            toPusherKey(`chat:${chatId}`),
+            'incoming-message',
+            message
+        )
 
         await db.zadd(`chat:${chatId}:messages`, {
             score: timestamp,
