@@ -27,8 +27,17 @@ const SidebarChatList = ({friends, sessionId}: SidebarChatListProps) => {
         pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`))
         pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`))
 
-        const newFriendHandler = () => {
-
+        const newFriendHandler = (newFriend: User) => {
+            toast.custom(t => (
+                <UnseenChatToast
+                    t={t}
+                    sessionId={sessionId}
+                    senderId={newFriend.id}
+                    senderImg={newFriend.image}
+                    senderName={newFriend.name}
+                    senderMessage={"This guy received you in friends"}
+                />
+            ))
         }
 
         const chatHandler = (message: ExtendedMessage) => {

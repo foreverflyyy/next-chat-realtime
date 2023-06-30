@@ -33,10 +33,10 @@ const Messages = ({initialMessages, sessionId, sessionImage, chatPartner, chatId
         pusherClient.bind('incoming-message', addMessageHandler);
 
         return () => {
-            pusherClient.unsubscribe(toPusherKey(`chat:${sessionId}--${chatPartner}`));
+            pusherClient.unsubscribe(toPusherKey(`chat:${chatId}`));
             pusherClient.unbind('incoming-message', addMessageHandler);
         }
-    }, []);
+    }, [chatId]);
 
     return (
         <div
