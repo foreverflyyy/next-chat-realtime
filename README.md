@@ -7,7 +7,7 @@
 
 # Screenshots: 
 
-<img alt="add-Friend" width="1680" src="https://i.postimg.cc/BZ29Ttwx/add-Friend.png"/>
-<img alt="add-Friend" width="1680" src="https://i.postimg.cc/Bbfx2mwf/add-Friend-Request.png"/>
-<img alt="add-Friend" width="1680" src="https://i.postimg.cc/7P1zpMWb/add-Friend-Success.png"/>
-<img alt="add-Friend" width="1680" src="https://i.postimg.cc/FKJdGjSr/chat.png"/>
+<img alt="add-Friend" width="720" src="https://i.postimg.cc/BZ29Ttwx/add-Friend.png"/>
+<img alt="add-Friend" width="720" src="https://i.postimg.cc/Bbfx2mwf/add-Friend-Request.png"/>
+<img alt="add-Friend" width="720" src="https://i.postimg.cc/7P1zpMWb/add-Friend-Success.png"/>
+<img alt="add-Friend" width="720" src="https://i.postimg.cc/FKJdGjSr/chat.png"/>
